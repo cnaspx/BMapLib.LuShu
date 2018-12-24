@@ -394,8 +394,12 @@
             var t = this._opts.landmarkPois, distance;
             for (var i = 0, len = t.length; i < len; i++) {
                 if (!t[i].bShow) {
-                    distance = this._map.getDistance(new BMap.Point(t[i].lng, t[i].lat), markerPoi);
-                    if (distance < 10) {
+                    // distance = this._map.getDistance(new BMap.Point(t[i].lng, t[i].lat), markerPoi);
+                    // if (distance < 10) {
+                    //     t[i].bShow = true;
+                    //     return i;
+                    // }
+                    if (t[i].lng==markerPoi.lng && t[i].lat==markerPoi.lat) {
                         t[i].bShow = true;
                         return i;
                     }
