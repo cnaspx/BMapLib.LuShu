@@ -210,6 +210,7 @@
     },
     LuShu.prototype.stop = function() {
         this.i = 0;
+	this.landmarkPoisIndex =-1;
         this._fromStop = true;
         clearInterval(this._intervalFlag);
         this._clearTimeout();
