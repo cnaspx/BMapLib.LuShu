@@ -176,6 +176,7 @@
         if (!this._opts.icon instanceof BMap.Icon) {
             this._opts.icon = defaultIcon;
         }
+        this.landmarkPoisIndex=-1;
     }
     LuShu.prototype._setOptions = function(opts) {
         if (!opts) {
@@ -360,7 +361,8 @@
         _setInfoWin: function(pos) {
             var me = this;
             me._overlay.setPosition(pos, me._marker.getIcon().size);
-            var index = me._troughPointIndex(pos);
+            me.landmarkPoisIndex=me._troughPointIndex(pos);
+            var index = me.landmarkPoisIndex;
             if (index != -1) {
                 clearInterval(me._intervalFlag);
                 me._overlay.setHtml(me._opts.landmarkPois[index].html);
@@ -391,8 +393,14 @@
             }
         },
         _troughPointIndex: function(markerPoi) {
+            var me = this;
             var t = this._opts.landmarkPois, distance;
-            for (var i = 0, len = t.length; i < len; i++) {
+            var beginIndex=0;
+            if(me.landmarkPoisIndex>=0)
+            {
+                beginIndex=me.landmarkPoisIndex+1;
+            }
+            for (var i = beginIndex, len = t.length; i < len; i++) {
                 if (!t[i].bShow) {
                     // distance = this._map.getDistance(new BMap.Point(t[i].lng, t[i].lat), markerPoi);
                     // if (distance < 10) {
